@@ -1,12 +1,18 @@
 var express = require('express');
+<<<<<<< HEAD
 var bodyParser = require('body-parser');
 var path = require('path');
 var fs = require('fs');
 var api = require('./app/routing/apiRoutes.js');
 
+=======
+>>>>>>> master
 var app = express();
 var PORT = 3300;
+var bp = require('body-parser');
+var apilisten = require("./app/routing/apiRoutes");
 
+<<<<<<< HEAD
 var test = [];
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -22,8 +28,14 @@ app.get("/survey", function(req, res) {
 
 api.init(app);
 
-app.listen(PORT, function() {
-    console.log(`connected to ${PORT}`);
-});
+=======
+app.use(bp.urlencoded({ extended: false }));
+app.use(bp.json());
 
-console.log("test");
+
+require("./app/routing/htmlRoutes")(app);
+apilisten(app);
+>>>>>>> master
+app.listen(PORT, function() {
+    console.log(`Listening on port ${PORT}`);
+});
