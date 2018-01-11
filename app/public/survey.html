@@ -1,12 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>survey</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+        crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
+
 </head>
+
 <body>
-    survey
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Survey</h1>
+            <hr>
+        </div>
+        <div class="row">
+
+            <div class="col-lg-12">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <strong>Add Characters</strong>
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <form role="form">
+
+                            <div class="form-group">
+                                <label for="first">First Name</label>
+                                <input type="text" class="form-control" id="first">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="last">Last Name</label>
+                                <input type="text" class="form-control" id="last">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="age">Age</label>
+                                <input type="text" class="form-control" id="age">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="q0">q0</label>
+                                <input type="text" class="form-control" id="age">
+                            </div>
+
+                        </form>
+                        <br>
+                        <div class="text-right">
+                            <a href="/home">
+                                <button type="submit" class="btn btn-primary btn-md" id="add-btn">Submit</button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $("#add-btn").on("click", function (event) {
+            // event.preventDefault();
+
+            // Grab values and store them
+            let first = $("#first").val().trim();
+            let last = $("#last").val().trim();
+            let age = $("#age").val().trim();
+
+            // New Friend with values passed
+            let newFriend = new Friend(first, last, age);
+            console.log(newFriend);
+
+            // POST newfriend to "/submit" route
+            $.post("/submit", newFriend, function (req, res) {
+                console.log("Post made");
+            });
+
+            // Reset fields
+            $("#first").val("");
+            $("#last").val("");
+            $("#age").val("");
+        });
+
+        // Friend constructor
+        function Friend(first, last, age) {
+            this.routeName = `${first.toLowerCase()}${last.toLowerCase()}`;
+            this.first = first;
+            this.last = last;
+            this.age = age;
+        }
+    </script>
 </body>
+
 </html>
