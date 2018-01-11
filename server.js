@@ -1,24 +1,15 @@
 var express = require('express');
-var bodyParser = require('body-parser');
-var path = require('path');
-var fs = require('fs');
-
 var app = express();
 var PORT = 3300;
+var bp = require('body-parser');
+var apilisten = require("./app/routing/apiRoutes");
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(bp.urlencoded({ extended: false }));
+app.use(bp.json());
 
-app.get("/", function(req, res) {
-    res.send('hi')
-});
 
-app.post('/post', function(req, res) {
-    console.log("test");
-});
-
+require("./app/routing/htmlRoutes")(app);
+apilisten(app);
 app.listen(PORT, function() {
-    console.log(`connected to ${PORT}`);
+    console.log(`Listening on port ${PORT}`);
 });
-
-console.log("test");
