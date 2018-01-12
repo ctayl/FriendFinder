@@ -38,13 +38,13 @@
     </div>
 
     <script>
-        $.get("/friends", function (data) {
+        $.get("/api/friends", function (data) {
             console.log(data);
 
             let packet = $("<div>");
             packet.addClass("panel panel-default");
 
-            for (let i = 0; i < data.length; i++) {
+            for (let i = 1; i < data.length; i++) {
 
                 let body = $("<div>");
                 body.addClass("panel-body");
