@@ -20,9 +20,10 @@ module.exports = function (app) {
 
     app.post('/api/friends', function (req, res) {
 
+        var match = friends.match(req.body);
         friends.list.push(req.body);
-        console.log(friendsList);
-        res.send("hi");
+        console.log(friends.list);
+        res.status(200).json(match);
     });
 
     app.get('/api/friends', function (req, res) {

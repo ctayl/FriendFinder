@@ -8,7 +8,7 @@ var PORT = 3300;
 var apiRouter = require("./app/routing/apiRoutes");
 var htmlRouter = require("./app/routing/htmlRoutes");
 
-app.use(bp.urlencoded({ extended: false }));
+app.use(bp.urlencoded({ extended: true }));
 app.use(bp.json());
 
 apiRouter(app);
