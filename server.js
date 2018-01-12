@@ -3,7 +3,7 @@ var bp = require('body-parser');
 
 var express = require('express');
 var app = express();
-var PORT = 3300;
+var PORT = process.env.PORT || 3300;
 
 var apiRouter = require("./app/routing/apiRoutes");
 var htmlRouter = require("./app/routing/htmlRoutes");
